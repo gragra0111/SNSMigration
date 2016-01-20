@@ -1,0 +1,230 @@
+2016-01-18 18:14:03.363 INFO  XmlBeanDefinitionReader.loadBeanDefinitions() Loading XML bean definitions from class path resource [applicationContext.xml]
+2016-01-18 18:14:03.621 INFO  GenericXmlApplicationContext.prepareRefresh() Refreshing org.springframework.context.support.GenericXmlApplicationContext@244038d0: startup date [Mon Jan 18 18:14:03 KST 2016]; root of context hierarchy
+2016-01-18 18:14:03.781 INFO  DefaultListableBeanFactory.preInstantiateSingletons() Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6b09bb57: defining beans [dataSource,postgresqlUserDAO,postgresqlGroupDAO,postgresqlDeptDAO,postgresqlUserDeptDAO,postgresqlGroupMemberDAO,postgresqlUserLinkDAO,postgresqlBookmarkDAO,postgresqlMessageDAO,postgresqlUserMessageDAO,postgresqlFileDAO,postgresqlArticleDAO,postgresqlArticleFileDAO,postgresqlArticleScopeDAO,postgresqlHashtagDAO,postgresqlArticleReplyDAO,postgresqlArticleLikeDAO,postgresqlBookmarkArticleDAO,postgresqlUserCareerDAO,oracleUserDAO,oracleGroupDAO,oracleDeptDAO,oracleUserDeptDAO,oracleGroupMemberDAO,oracleUserLinkDAO,oracleBookmarkDAO,oracleMessageDAO,oracleUserMessageDAO,oracleFileDAO,oracleArticleDAO,oracleArticleFileDAO,oracleArticleScopeDAO,oracleHashtagDAO,oracleArticleReplyDAO,oracleArticleLikeDAO,oracleBookmarkArticleDAO,oracleUserCareerDAO,mongo,org.springframework.beans.factory.config.CustomEditorConfigurer#0,org.springframework.beans.factory.config.CustomEditorConfigurer#1,mongoTemplate,mongoUsersDAO,mongoGroupsDAO,mongoDeptsDAO,mongoGrpMembersDAO,mongoMylinksDAO,mongoBookmarksDAO,mongoMytagsDAO,mongoArticlesDAO,mongoTaglistsDAO,mongoRepliesDAO,mongoBookmarklistsDAO,mongoCareersDAO]; root of factory hierarchy
+2016-01-18 18:14:03.907 INFO  DriverManagerDataSource.setDriverClassName() Loaded JDBC driver: org.postgresql.Driver
+2016-01-18 18:14:04.564 INFO  cluster.info() Cluster created with settings {hosts=[192.168.100.48:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+2016-01-18 18:14:04.585 DEBUG cluster.debug() Updating cluster description to  {type=UNKNOWN, servers=[{address=192.168.100.48:27017, type=UNKNOWN, state=CONNECTING}]
+2016-01-18 18:14:04.648 INFO  connection.info() Opened connection [connectionId{localValue:1, serverValue:4405}] to 192.168.100.48:27017
+2016-01-18 18:14:04.648 DEBUG cluster.debug() Checking status of 192.168.100.48:27017
+2016-01-18 18:14:04.659 INFO  cluster.info() Monitor thread successfully connected to server with description ServerDescription{address=192.168.100.48:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 4, 9]}, minWireVersion=0, maxWireVersion=0, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=9550511}
+2016-01-18 18:14:04.660 DEBUG cluster.debug() Updating cluster description to  {type=STANDALONE, servers=[{address=192.168.100.48:27017, type=STANDALONE, roundTripTime=9.6 ms, state=CONNECTED}]
+2016-01-18 18:14:04.778 INFO  connection.info() Opened connection [connectionId{localValue:2, serverValue:4406}] to 192.168.100.48:27017
+2016-01-18 18:14:04.786 DEBUG query.debug() Sending query of namespace sns.users on connection [connectionId{localValue:2, serverValue:4406}] to server 192.168.100.48:27017
+2016-01-18 18:14:04.821 DEBUG query.debug() Query completed
+2016-01-18 18:14:05.012 INFO  UserController.userTableMigration() U2016000000001
+2016-01-18 18:14:05.014 INFO  UserController.userTableMigration() twha
+2016-01-18 18:14:05.068 INFO  UserController.userTableMigration() U2016000000002
+2016-01-18 18:14:05.070 INFO  UserController.userTableMigration() sjkim
+2016-01-18 18:14:05.117 INFO  UserController.userTableMigration() U2016000000003
+2016-01-18 18:14:05.117 INFO  UserController.userTableMigration() jykim
+2016-01-18 18:14:05.160 INFO  UserController.userTableMigration() U2016000000004
+2016-01-18 18:14:05.161 INFO  UserController.userTableMigration() kjh4002
+2016-01-18 18:14:05.201 INFO  UserController.userTableMigration() U2016000000005
+2016-01-18 18:14:05.202 INFO  UserController.userTableMigration() mooriya89
+2016-01-18 18:14:05.243 INFO  UserController.userTableMigration() U2016000000006
+2016-01-18 18:14:05.244 INFO  UserController.userTableMigration() wjhgirl
+2016-01-18 18:14:05.284 INFO  UserController.userTableMigration() U2016000000007
+2016-01-18 18:14:05.284 INFO  UserController.userTableMigration() wkkim
+2016-01-18 18:14:05.324 INFO  UserController.userTableMigration() U2016000000008
+2016-01-18 18:14:05.324 INFO  UserController.userTableMigration() choimj
+2016-01-18 18:14:05.358 INFO  UserController.userTableMigration() U2016000000009
+2016-01-18 18:14:05.359 INFO  UserController.userTableMigration() ksh
+2016-01-18 18:14:05.397 INFO  UserController.userTableMigration() U2016000000010
+2016-01-18 18:14:05.398 INFO  UserController.userTableMigration() skheo
+2016-01-18 18:14:05.434 INFO  UserController.userTableMigration() U2016000000011
+2016-01-18 18:14:05.435 INFO  UserController.userTableMigration() wtfull
+2016-01-18 18:14:05.473 INFO  UserController.userTableMigration() U2016000000012
+2016-01-18 18:14:05.473 INFO  UserController.userTableMigration() syn
+2016-01-18 18:14:05.508 INFO  UserController.userTableMigration() U2016000000013
+2016-01-18 18:14:05.509 INFO  UserController.userTableMigration() heepan.kim
+2016-01-18 18:14:05.548 INFO  UserController.userTableMigration() U2016000000014
+2016-01-18 18:14:05.549 INFO  UserController.userTableMigration() sthan
+2016-01-18 18:14:05.589 INFO  UserController.userTableMigration() U2016000000015
+2016-01-18 18:14:05.590 INFO  UserController.userTableMigration() nitid12
+2016-01-18 18:14:05.626 INFO  UserController.userTableMigration() U2016000000016
+2016-01-18 18:14:05.626 INFO  UserController.userTableMigration() taker9101
+2016-01-18 18:14:05.663 INFO  UserController.userTableMigration() U2016000000017
+2016-01-18 18:14:05.664 INFO  UserController.userTableMigration() dblee
+2016-01-18 18:14:05.700 INFO  UserController.userTableMigration() U2016000000018
+2016-01-18 18:14:05.700 INFO  UserController.userTableMigration() choijh
+2016-01-18 18:14:05.739 INFO  UserController.userTableMigration() U2016000000019
+2016-01-18 18:14:05.739 INFO  UserController.userTableMigration() spring
+2016-01-18 18:14:05.775 INFO  UserController.userTableMigration() U2016000000020
+2016-01-18 18:14:05.776 INFO  UserController.userTableMigration() hiris
+2016-01-18 18:14:05.814 INFO  UserController.userTableMigration() U2016000000021
+2016-01-18 18:14:05.814 INFO  UserController.userTableMigration() swyi
+2016-01-18 18:14:05.849 INFO  UserController.userTableMigration() U2016000000022
+2016-01-18 18:14:05.850 INFO  UserController.userTableMigration() nsw1105
+2016-01-18 18:14:05.883 INFO  UserController.userTableMigration() U2016000000023
+2016-01-18 18:14:05.883 INFO  UserController.userTableMigration() xellos
+2016-01-18 18:14:05.916 INFO  UserController.userTableMigration() U2016000000024
+2016-01-18 18:14:05.917 INFO  UserController.userTableMigration() sean
+2016-01-18 18:14:05.955 INFO  UserController.userTableMigration() U2016000000025
+2016-01-18 18:14:05.956 INFO  UserController.userTableMigration() smkim
+2016-01-18 18:14:05.995 INFO  UserController.userTableMigration() U2016000000026
+2016-01-18 18:14:05.995 INFO  UserController.userTableMigration() kamida
+2016-01-18 18:14:06.033 INFO  UserController.userTableMigration() U2016000000027
+2016-01-18 18:14:06.033 INFO  UserController.userTableMigration() ksh85
+2016-01-18 18:14:06.065 INFO  UserController.userTableMigration() U2016000000028
+2016-01-18 18:14:06.066 INFO  UserController.userTableMigration() hjlee
+2016-01-18 18:14:06.101 INFO  UserController.userTableMigration() U2016000000029
+2016-01-18 18:14:06.102 INFO  UserController.userTableMigration() thjeon
+2016-01-18 18:14:06.142 INFO  UserController.userTableMigration() U2016000000030
+2016-01-18 18:14:06.143 INFO  UserController.userTableMigration() jaypark
+2016-01-18 18:14:06.179 INFO  UserController.userTableMigration() U2016000000031
+2016-01-18 18:14:06.180 INFO  UserController.userTableMigration() swlee
+2016-01-18 18:14:06.216 INFO  UserController.userTableMigration() U2016000000032
+2016-01-18 18:14:06.217 INFO  UserController.userTableMigration() bright_jung
+2016-01-18 18:14:06.255 INFO  UserController.userTableMigration() U2016000000033
+2016-01-18 18:14:06.256 INFO  UserController.userTableMigration() kjs
+2016-01-18 18:14:06.291 INFO  UserController.userTableMigration() U2016000000034
+2016-01-18 18:14:06.291 INFO  UserController.userTableMigration() iamnah
+2016-01-18 18:14:06.324 INFO  UserController.userTableMigration() U2016000000035
+2016-01-18 18:14:06.325 INFO  UserController.userTableMigration() mirjslee
+2016-01-18 18:14:06.364 INFO  UserController.userTableMigration() U2016000000036
+2016-01-18 18:14:06.365 INFO  UserController.userTableMigration() sun
+2016-01-18 18:14:06.408 INFO  UserController.userTableMigration() U2016000000037
+2016-01-18 18:14:06.409 INFO  UserController.userTableMigration() hccho
+2016-01-18 18:14:06.446 INFO  UserController.userTableMigration() U2016000000038
+2016-01-18 18:14:06.447 INFO  UserController.userTableMigration() kangs
+2016-01-18 18:14:06.483 INFO  UserController.userTableMigration() U2016000000039
+2016-01-18 18:14:06.483 INFO  UserController.userTableMigration() badain
+2016-01-18 18:14:06.528 INFO  UserController.userTableMigration() U2016000000040
+2016-01-18 18:14:06.528 INFO  UserController.userTableMigration() kimjh
+2016-01-18 18:14:06.565 INFO  UserController.userTableMigration() U2016000000041
+2016-01-18 18:14:06.566 INFO  UserController.userTableMigration() armorer
+2016-01-18 18:14:06.608 INFO  UserController.userTableMigration() U2016000000042
+2016-01-18 18:14:06.609 INFO  UserController.userTableMigration() choibyuk
+2016-01-18 18:14:06.647 INFO  UserController.userTableMigration() U2016000000043
+2016-01-18 18:14:06.648 INFO  UserController.userTableMigration() mhpark
+2016-01-18 18:14:06.693 INFO  UserController.userTableMigration() U2016000000044
+2016-01-18 18:14:06.694 INFO  UserController.userTableMigration() gurusyjang
+2016-01-18 18:14:06.733 INFO  UserController.userTableMigration() U2016000000045
+2016-01-18 18:14:06.733 INFO  UserController.userTableMigration() sjt
+2016-01-18 18:14:06.771 INFO  UserController.userTableMigration() U2016000000046
+2016-01-18 18:14:06.772 INFO  UserController.userTableMigration() yykim
+2016-01-18 18:14:06.807 INFO  UserController.userTableMigration() U2016000000047
+2016-01-18 18:14:06.808 INFO  UserController.userTableMigration() gragra0111
+2016-01-18 18:14:06.847 INFO  UserController.userTableMigration() U2016000000048
+2016-01-18 18:14:06.847 INFO  UserController.userTableMigration() lmj0901
+2016-01-18 18:14:06.883 INFO  UserController.userTableMigration() U2016000000049
+2016-01-18 18:14:06.883 INFO  UserController.userTableMigration() maroon
+2016-01-18 18:14:06.930 INFO  UserController.userTableMigration() U2016000000050
+2016-01-18 18:14:06.930 INFO  UserController.userTableMigration() perfect3020
+2016-01-18 18:14:06.965 INFO  UserController.userTableMigration() U2016000000051
+2016-01-18 18:14:06.965 INFO  UserController.userTableMigration() vvhanvv
+2016-01-18 18:14:48.691 INFO  XmlBeanDefinitionReader.loadBeanDefinitions() Loading XML bean definitions from class path resource [applicationContext.xml]
+2016-01-18 18:14:48.947 INFO  GenericXmlApplicationContext.prepareRefresh() Refreshing org.springframework.context.support.GenericXmlApplicationContext@244038d0: startup date [Mon Jan 18 18:14:48 KST 2016]; root of context hierarchy
+2016-01-18 18:14:49.114 INFO  DefaultListableBeanFactory.preInstantiateSingletons() Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6b09bb57: defining beans [dataSource,postgresqlUserDAO,postgresqlGroupDAO,postgresqlDeptDAO,postgresqlUserDeptDAO,postgresqlGroupMemberDAO,postgresqlUserLinkDAO,postgresqlBookmarkDAO,postgresqlMessageDAO,postgresqlUserMessageDAO,postgresqlFileDAO,postgresqlArticleDAO,postgresqlArticleFileDAO,postgresqlArticleScopeDAO,postgresqlHashtagDAO,postgresqlArticleReplyDAO,postgresqlArticleLikeDAO,postgresqlBookmarkArticleDAO,postgresqlUserCareerDAO,oracleUserDAO,oracleGroupDAO,oracleDeptDAO,oracleUserDeptDAO,oracleGroupMemberDAO,oracleUserLinkDAO,oracleBookmarkDAO,oracleMessageDAO,oracleUserMessageDAO,oracleFileDAO,oracleArticleDAO,oracleArticleFileDAO,oracleArticleScopeDAO,oracleHashtagDAO,oracleArticleReplyDAO,oracleArticleLikeDAO,oracleBookmarkArticleDAO,oracleUserCareerDAO,mongo,org.springframework.beans.factory.config.CustomEditorConfigurer#0,org.springframework.beans.factory.config.CustomEditorConfigurer#1,mongoTemplate,mongoUsersDAO,mongoGroupsDAO,mongoDeptsDAO,mongoGrpMembersDAO,mongoMylinksDAO,mongoBookmarksDAO,mongoMytagsDAO,mongoArticlesDAO,mongoTaglistsDAO,mongoRepliesDAO,mongoBookmarklistsDAO,mongoCareersDAO]; root of factory hierarchy
+2016-01-18 18:14:49.245 INFO  DriverManagerDataSource.setDriverClassName() Loaded JDBC driver: org.postgresql.Driver
+2016-01-18 18:14:49.928 INFO  cluster.info() Cluster created with settings {hosts=[192.168.100.48:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+2016-01-18 18:14:49.949 DEBUG cluster.debug() Updating cluster description to  {type=UNKNOWN, servers=[{address=192.168.100.48:27017, type=UNKNOWN, state=CONNECTING}]
+2016-01-18 18:14:50.019 INFO  connection.info() Opened connection [connectionId{localValue:1, serverValue:4407}] to 192.168.100.48:27017
+2016-01-18 18:14:50.019 DEBUG cluster.debug() Checking status of 192.168.100.48:27017
+2016-01-18 18:14:50.023 INFO  cluster.info() Monitor thread successfully connected to server with description ServerDescription{address=192.168.100.48:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 4, 9]}, minWireVersion=0, maxWireVersion=0, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=2333266}
+2016-01-18 18:14:50.024 DEBUG cluster.debug() Updating cluster description to  {type=STANDALONE, servers=[{address=192.168.100.48:27017, type=STANDALONE, roundTripTime=2.3 ms, state=CONNECTED}]
+2016-01-18 18:14:50.150 INFO  connection.info() Opened connection [connectionId{localValue:2, serverValue:4408}] to 192.168.100.48:27017
+2016-01-18 18:14:50.157 DEBUG query.debug() Sending query of namespace sns.users on connection [connectionId{localValue:2, serverValue:4408}] to server 192.168.100.48:27017
+2016-01-18 18:14:50.191 DEBUG query.debug() Query completed
+2016-01-18 18:14:50.364 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000052
+2016-01-18 18:14:50.365 INFO  UserController.userTableMigration() loginId : twha
+2016-01-18 18:14:50.405 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000053
+2016-01-18 18:14:50.406 INFO  UserController.userTableMigration() loginId : sjkim
+2016-01-18 18:14:50.445 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000054
+2016-01-18 18:14:50.445 INFO  UserController.userTableMigration() loginId : jykim
+2016-01-18 18:14:50.484 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000055
+2016-01-18 18:14:50.484 INFO  UserController.userTableMigration() loginId : kjh4002
+2016-01-18 18:14:50.521 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000056
+2016-01-18 18:14:50.521 INFO  UserController.userTableMigration() loginId : mooriya89
+2016-01-18 18:14:50.560 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000057
+2016-01-18 18:14:50.560 INFO  UserController.userTableMigration() loginId : wjhgirl
+2016-01-18 18:14:50.598 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000058
+2016-01-18 18:14:50.598 INFO  UserController.userTableMigration() loginId : wkkim
+2016-01-18 18:14:50.641 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000059
+2016-01-18 18:14:50.641 INFO  UserController.userTableMigration() loginId : choimj
+2016-01-18 18:14:50.680 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000060
+2016-01-18 18:14:50.681 INFO  UserController.userTableMigration() loginId : ksh
+2016-01-18 18:14:50.718 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000061
+2016-01-18 18:14:50.718 INFO  UserController.userTableMigration() loginId : skheo
+2016-01-18 18:14:50.755 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000062
+2016-01-18 18:14:50.755 INFO  UserController.userTableMigration() loginId : wtfull
+2016-01-18 18:14:50.791 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000063
+2016-01-18 18:14:50.792 INFO  UserController.userTableMigration() loginId : syn
+2016-01-18 18:14:50.830 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000064
+2016-01-18 18:14:50.830 INFO  UserController.userTableMigration() loginId : heepan.kim
+2016-01-18 18:14:50.872 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000065
+2016-01-18 18:14:50.872 INFO  UserController.userTableMigration() loginId : sthan
+2016-01-18 18:14:50.913 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000066
+2016-01-18 18:14:50.913 INFO  UserController.userTableMigration() loginId : nitid12
+2016-01-18 18:14:50.953 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000067
+2016-01-18 18:14:50.954 INFO  UserController.userTableMigration() loginId : taker9101
+2016-01-18 18:14:50.991 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000068
+2016-01-18 18:14:50.992 INFO  UserController.userTableMigration() loginId : dblee
+2016-01-18 18:14:51.029 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000069
+2016-01-18 18:14:51.030 INFO  UserController.userTableMigration() loginId : choijh
+2016-01-18 18:14:51.067 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000070
+2016-01-18 18:14:51.067 INFO  UserController.userTableMigration() loginId : spring
+2016-01-18 18:14:51.103 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000071
+2016-01-18 18:14:51.104 INFO  UserController.userTableMigration() loginId : hiris
+2016-01-18 18:14:51.142 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000072
+2016-01-18 18:14:51.143 INFO  UserController.userTableMigration() loginId : swyi
+2016-01-18 18:14:51.179 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000073
+2016-01-18 18:14:51.179 INFO  UserController.userTableMigration() loginId : nsw1105
+2016-01-18 18:14:51.217 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000074
+2016-01-18 18:14:51.217 INFO  UserController.userTableMigration() loginId : xellos
+2016-01-18 18:14:51.254 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000075
+2016-01-18 18:14:51.255 INFO  UserController.userTableMigration() loginId : sean
+2016-01-18 18:14:51.292 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000076
+2016-01-18 18:14:51.293 INFO  UserController.userTableMigration() loginId : smkim
+2016-01-18 18:14:51.329 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000077
+2016-01-18 18:14:51.329 INFO  UserController.userTableMigration() loginId : kamida
+2016-01-18 18:14:51.370 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000078
+2016-01-18 18:14:51.371 INFO  UserController.userTableMigration() loginId : ksh85
+2016-01-18 18:14:51.408 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000079
+2016-01-18 18:14:51.409 INFO  UserController.userTableMigration() loginId : hjlee
+2016-01-18 18:14:51.445 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000080
+2016-01-18 18:14:51.446 INFO  UserController.userTableMigration() loginId : thjeon
+2016-01-18 18:14:51.482 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000081
+2016-01-18 18:14:51.482 INFO  UserController.userTableMigration() loginId : jaypark
+2016-01-18 18:14:51.520 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000082
+2016-01-18 18:14:51.521 INFO  UserController.userTableMigration() loginId : swlee
+2016-01-18 18:14:51.558 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000083
+2016-01-18 18:14:51.559 INFO  UserController.userTableMigration() loginId : bright_jung
+2016-01-18 18:14:51.595 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000084
+2016-01-18 18:14:51.595 INFO  UserController.userTableMigration() loginId : kjs
+2016-01-18 18:14:51.634 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000085
+2016-01-18 18:14:51.635 INFO  UserController.userTableMigration() loginId : iamnah
+2016-01-18 18:14:51.670 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000086
+2016-01-18 18:14:51.670 INFO  UserController.userTableMigration() loginId : mirjslee
+2016-01-18 18:14:51.716 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000087
+2016-01-18 18:14:51.717 INFO  UserController.userTableMigration() loginId : sun
+2016-01-18 18:14:51.753 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000088
+2016-01-18 18:14:51.754 INFO  UserController.userTableMigration() loginId : hccho
+2016-01-18 18:14:51.796 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000089
+2016-01-18 18:14:51.797 INFO  UserController.userTableMigration() loginId : kangs
+2016-01-18 18:14:51.836 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000090
+2016-01-18 18:14:51.836 INFO  UserController.userTableMigration() loginId : badain
+2016-01-18 18:14:51.877 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000091
+2016-01-18 18:14:51.878 INFO  UserController.userTableMigration() loginId : kimjh
+2016-01-18 18:14:51.917 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000092
+2016-01-18 18:14:51.917 INFO  UserController.userTableMigration() loginId : armorer
+2016-01-18 18:14:51.953 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000093
+2016-01-18 18:14:51.953 INFO  UserController.userTableMigration() loginId : choibyuk
+2016-01-18 18:14:51.991 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000094
+2016-01-18 18:14:51.992 INFO  UserController.userTableMigration() loginId : mhpark
+2016-01-18 18:14:52.028 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000095
+2016-01-18 18:14:52.028 INFO  UserController.userTableMigration() loginId : gurusyjang
+2016-01-18 18:14:52.066 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000096
+2016-01-18 18:14:52.067 INFO  UserController.userTableMigration() loginId : sjt
+2016-01-18 18:14:52.103 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000097
+2016-01-18 18:14:52.103 INFO  UserController.userTableMigration() loginId : yykim
+2016-01-18 18:14:52.150 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000098
+2016-01-18 18:14:52.150 INFO  UserController.userTableMigration() loginId : gragra0111
+2016-01-18 18:14:52.190 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000099
+2016-01-18 18:14:52.192 INFO  UserController.userTableMigration() loginId : lmj0901
+2016-01-18 18:14:52.233 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000100
+2016-01-18 18:14:52.234 INFO  UserController.userTableMigration() loginId : maroon
+2016-01-18 18:14:52.270 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000101
+2016-01-18 18:14:52.271 INFO  UserController.userTableMigration() loginId : perfect3020
+2016-01-18 18:14:52.307 INFO  UserController.userTableMigration() 생성된 유저아이디 : U2016000000102
+2016-01-18 18:14:52.308 INFO  UserController.userTableMigration() loginId : vvhanvv
