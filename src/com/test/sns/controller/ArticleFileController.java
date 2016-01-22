@@ -1,22 +1,27 @@
 package com.test.sns.controller;
 
-import org.springframework.context.ApplicationContext;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dao.oracle.OracleArticleFileDAO;
 import com.test.sns.dao.postgresql.PostgresqlArticleFileDAO;
 
+@Service
 public class ArticleFileController {
-	private PostgresqlArticleFileDAO postgresqlArticleFileDAO;
+	private final Logger logger = Logger.getLogger(ArticleFileController.class);
+	@Autowired
+	private OracleArticleFileDAO oracleArticleFileDAO;
+	//private PostgresqlArticleFileDAO postgresqlArticleFileDAO;
 	
-	public ArticleFileController(ApplicationContext context) {
-		this.postgresqlArticleFileDAO = context.getBean("postgresqlArticleFileDAO", PostgresqlArticleFileDAO.class);
-		articleFileTableMigration();
+	public void setOracleArticleFileDAO(OracleArticleFileDAO oracleArticleFileDAO) {
+		this.oracleArticleFileDAO = oracleArticleFileDAO;
 	}
-
-	private void articleFileTableMigration() {
+	
+	public void articleFileTableMigration() {
 		//인서트
-		postgresqlArticleFileDAO.insert();
-		System.out.println("INSERT END");
+		oracleArticleFileDAO.insert();
+		logger.info("INSERT END");
 	}
 
 }

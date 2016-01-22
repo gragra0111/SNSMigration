@@ -1,7 +1,10 @@
 package com.test.sns.main;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.test.sns.controller.ArticleController;
 import com.test.sns.controller.ArticleFileController;
@@ -22,45 +25,67 @@ import com.test.sns.controller.UserDeptController;
 import com.test.sns.controller.UserLinkController;
 import com.test.sns.controller.UserMessageController;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="/applicationContext.xml")
 public class MigrationMain {
-	public static void main(String[] args) {
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		
-		UserController userController = new UserController(context);
-		
-		//GroupController groupController = new GroupController(context);
-		
-		//DeptController deptController = new DeptController(context);
-		
-		//UserDeptController userDeptController = new UserDeptController(context);
-		
-		//GroupMemberController groupMemberController = new GroupMemberController(context);
-		
-		//UserLinkController userLinkController = new UserLinkController(context);
-		
-		//BookmarkController bookmarkController = new BookmarkController(context);
-		
-		//MessageController messageController = new MessageController(context);
-		
-		//UserMessageController userMessageController = new UserMessageController(context);
-		
-		//FileController fileController = new FileController(context);
-		
-		//ArticleController articleController = new ArticleController(context);
-		
-		//ArticleFileController articleFileController = new ArticleFileController(context);
-		
-		//ArticleScopeController articleScopeController = new ArticleScopeController(context);
-		
-		//HashtagController hashtagController = new HashtagController(context);
-		
-		//ArticleReplyController articleReplyController = new ArticleReplyController(context);
-		
-		//ArticleLikeController articleLikeController = new ArticleLikeController(context);
-		
-		//BookmarkArticleController bookmarkArticleController = new BookmarkArticleController(context);
-		
-		//UserCareerController userCareerController = new UserCareerController(context);
-		
+	@Autowired
+	private UserController userController;
+	@Autowired 
+	private GroupController groupController;
+	@Autowired 
+	private DeptController deptController;
+	@Autowired 
+	private UserDeptController userDeptController;
+	@Autowired 
+	private GroupMemberController groupMemberController;
+	@Autowired 
+	private UserLinkController userLinkController;
+	@Autowired 
+	private BookmarkController bookmarkController;
+	@Autowired 
+	private MessageController messageController;
+	@Autowired 
+	private UserMessageController userMessageController;
+	@Autowired 
+	private FileController fileController;
+	@Autowired
+	private ArticleController articleController;
+	@Autowired 
+	private ArticleFileController articleFileController;
+	@Autowired 
+	private ArticleScopeController articleScopeController;
+	@Autowired 
+	private HashtagController hashtagController;
+	@Autowired 
+	private ArticleReplyController articleReplyController;
+	@Autowired 
+	private ArticleLikeController articleLikeController;
+	@Autowired 
+	private BookmarkArticleController bookmarkArticleController;
+	@Autowired 
+	private UserCareerController userCareerController;
+	
+	@Test
+	public void doMigration() {
+		userController.userTableMigration();
+		groupController.groupTableMigration();
+		deptController.deptTableMigration();
+		userDeptController.userDeptTableMigration();
+		groupMemberController.groupMemberTableMigration();
+		userLinkController.userLinkTableMigration();
+		bookmarkController.bookmarkTableMigration();
+		messageController.messageTableMigration();
+		userMessageController.userMessageTableMigration();
+		fileController.fileTableMigration();
+		articleController.articleTableMigration();
+		articleFileController.articleFileTableMigration();
+		articleScopeController.articleScopeTableMigration();
+		hashtagController.hashtagTableMigration();
+		hashtagController.articleHashtagTableMigration();
+		articleReplyController.articleReplyTableMigration();
+		articleLikeController.articleLikeTableMigration();
+		bookmarkArticleController.bookmarkArticleTableMigration();
+		userCareerController.userCareerMigration();
 	}
+
 }

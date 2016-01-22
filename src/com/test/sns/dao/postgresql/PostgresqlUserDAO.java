@@ -10,9 +10,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.test.sns.dto.oracle.OracleUserDTO;
 
+@Service
 public class PostgresqlUserDAO {
+	@Autowired
 	private DataSource dataSource;
 	
 	public void setDataSource(DataSource dataSource) {

@@ -7,9 +7,14 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.test.sns.dto.oracle.OracleMessageDTO;
 
+@Service
 public class PostgresqlMessageDAO {
+	@Autowired
 	private DataSource dataSource;
 	
 	public void setDataSource(DataSource dataSource) {

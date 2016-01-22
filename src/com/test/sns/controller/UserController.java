@@ -1,11 +1,10 @@
 package com.test.sns.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dao.mongo.MongoUsersDAO;
 import com.test.sns.dao.oracle.OracleUserDAO;
@@ -13,17 +12,21 @@ import com.test.sns.dao.postgresql.PostgresqlUserDAO;
 import com.test.sns.dto.mongo.MongoUsersDTO;
 import com.test.sns.dto.oracle.OracleUserDTO;
 
-@Controller
+@Service
 public class UserController {
 	private final Logger logger = Logger.getLogger(UserController.class);
+	@Autowired
 	private MongoUsersDAO mongoUsersDAO;
-	//private OracleUserDAO oracleUserDAO;
-	private PostgresqlUserDAO postgresqlUserDAO;
+	@Autowired
+	private OracleUserDAO oracleUserDAO;
+	//private PostgresqlUserDAO postgresqlUserDAO;
 	
-	public UserController(ApplicationContext context) {
-		this.mongoUsersDAO = context.getBean("mongoUsersDAO", MongoUsersDAO.class);
-		this.postgresqlUserDAO = context.getBean("postgresqlUserDAO", PostgresqlUserDAO.class);
-		userTableMigration();
+	public void setMongoUsersDAO(MongoUsersDAO mongoUsersDAO) {
+		this.mongoUsersDAO = mongoUsersDAO;
+	}
+
+	public void setOracleUserDAO(OracleUserDAO oracleUserDAO) {
+		this.oracleUserDAO = oracleUserDAO;
 	}
 	
 	public void userTableMigration() {
@@ -32,7 +35,8 @@ public class UserController {
 		
 		for(MongoUsersDTO data : list) {
 			//유저ID 생성
-			String userId = postgresqlUserDAO.setUserId();
+			String userId = oracleUserDAO.setUserId();
+			//String userId = postgresqlUserDAO.setUserId();
 			logger.info("생성된 유저아이디 : " + userId);
 			OracleUserDTO oracleUserDTO = new OracleUserDTO();
 			oracleUserDTO.setTemp_user_id(data.get_id());
@@ -47,7 +51,8 @@ public class UserController {
 			oracleUserDTO.setUse_yn("Y");
 			//인서트
 			logger.info("loginId : " + oracleUserDTO.getLgn_id());
-			postgresqlUserDAO.insert(oracleUserDTO);
+			oracleUserDAO.insert(oracleUserDTO);
+			//postgresqlUserDAO.insert(oracleUserDTO);
 		}
 	}
 	

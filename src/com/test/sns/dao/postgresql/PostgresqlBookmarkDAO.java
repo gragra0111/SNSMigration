@@ -9,9 +9,14 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.test.sns.dto.oracle.OracleBookmarkDTO;
 
+@Service
 public class PostgresqlBookmarkDAO {
+	@Autowired
 	private DataSource dataSource;
 	
 	public void setDataSource(DataSource dataSource) {

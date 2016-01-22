@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dao.mongo.MongoArticlesDAO;
 import com.test.sns.dao.oracle.OracleArticleDAO;
@@ -16,18 +18,28 @@ import com.test.sns.dao.postgresql.PostgresqlUserDAO;
 import com.test.sns.dto.mongo.MongoArticlesDTO;
 import com.test.sns.dto.oracle.OracleArticleDTO;
 
+@Service
 public class ArticleController {
+	private final Logger logger = Logger.getLogger(ArticleController.class);
+	@Autowired
 	private MongoArticlesDAO mongoArticlesDAO;
-	//private OracleArticleDAO oracleArticleDAO;
-	//private OracleUserDAO oracleUserDAO;
-	private PostgresqlArticleDAO postgresqlArticleDAO;
-	private PostgresqlUserDAO postgresqlUserDAO;
+	@Autowired
+	private OracleArticleDAO oracleArticleDAO;
+	@Autowired
+	private OracleUserDAO oracleUserDAO;
+	/*private PostgresqlArticleDAO postgresqlArticleDAO;
+	private PostgresqlUserDAO postgresqlUserDAO;*/
 	
-	public ArticleController(ApplicationContext context) {
-		this.mongoArticlesDAO = context.getBean("mongoArticlesDAO", MongoArticlesDAO.class);
-		this.postgresqlArticleDAO = context.getBean("postgresqlArticleDAO", PostgresqlArticleDAO.class);
-		this.postgresqlUserDAO = context.getBean("postgresqlUserDAO", PostgresqlUserDAO.class);
-		articleTableMigration();
+	public void setMongoArticlesDAO(MongoArticlesDAO mongoArticlesDAO) {
+		this.mongoArticlesDAO = mongoArticlesDAO;
+	}
+
+	public void setOracleArticleDAO(OracleArticleDAO oracleArticleDAO) {
+		this.oracleArticleDAO = oracleArticleDAO;
+	}
+
+	public void setOracleUserDAO(OracleUserDAO oracleUserDAO) {
+		this.oracleUserDAO = oracleUserDAO;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -38,7 +50,7 @@ public class ArticleController {
 		
 		for(MongoArticlesDTO mongoData : list) {
 			//유저ID 찾기
-			String userId = postgresqlUserDAO.getUserIdByEmpNo(mongoData.getEmployeeId());
+			String userId = oracleUserDAO.getUserIdByEmpNo(mongoData.getEmployeeId());
 			if(userId != null) {
 				OracleArticleDTO oracleArticleDTO = new OracleArticleDTO();
 				oracleArticleDTO.setCreate_id(userId);
@@ -47,7 +59,7 @@ public class ArticleController {
 				oracleArticleDTO.setCreate_dt(createDt);
 				oracleArticleDTO.setUpdate_dt(createDt);
 				//아티클ID 생성
-				String articleId = postgresqlArticleDAO.setArticleId(createDt);
+				String articleId = oracleArticleDAO.setArticleId(createDt);
 				oracleArticleDTO.setArticle_id(articleId);
 				oracleArticleDTO.setTemp_article_id(mongoData.get_id());
 				//아티클 타입
@@ -88,9 +100,10 @@ public class ArticleController {
 				}
 				
 				//인서트
-				System.out.println("articleId : "+oracleArticleDTO.getArticle_id()+", articleType : "+oracleArticleDTO.getArticle_type()+", del_stat : "+oracleArticleDTO.getDel_stat());
-				postgresqlArticleDAO.insert(oracleArticleDTO);
+				logger.info("articleId : "+oracleArticleDTO.getArticle_id()+", articleType : "+oracleArticleDTO.getArticle_type()+", del_stat : "+oracleArticleDTO.getDel_stat());
+				oracleArticleDAO.insert(oracleArticleDTO);
 			}
 		}
 	}
+
 }

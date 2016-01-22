@@ -7,7 +7,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dao.mongo.MongoArticlesDAO;
 import com.test.sns.dao.oracle.OracleFileDAO;
@@ -17,20 +19,30 @@ import com.test.sns.dao.postgresql.PostgresqlUserDAO;
 import com.test.sns.dto.mongo.MongoArticlesDTO;
 import com.test.sns.dto.oracle.OracleFileDTO;
 
+@Service
 public class FileController {
+	private final Logger logger = Logger.getLogger(FileController.class);
+	@Autowired
 	private MongoArticlesDAO mongoArticlesDAO;
-	//private OracleFileDAO oracleFileDAO;
-	//private OracleUserDAO oracleUserDAO;
-	private PostgresqlFileDAO postgresqlFileDAO;
-	private PostgresqlUserDAO postgresqlUserDAO;
+	@Autowired
+	private OracleFileDAO oracleFileDAO;
+	@Autowired
+	private OracleUserDAO oracleUserDAO;
+	/*private PostgresqlFileDAO postgresqlFileDAO;
+	private PostgresqlUserDAO postgresqlUserDAO;*/
 	
-	public FileController(ApplicationContext context) {
-		this.mongoArticlesDAO = context.getBean("mongoArticlesDAO", MongoArticlesDAO.class);
-		this.postgresqlFileDAO = context.getBean("postgresqlFileDAO", PostgresqlFileDAO.class);
-		this.postgresqlUserDAO = context.getBean("postgresqlUserDAO", PostgresqlUserDAO.class);
-		fileTableMigration();
+	public void setMongoArticlesDAO(MongoArticlesDAO mongoArticlesDAO) {
+		this.mongoArticlesDAO = mongoArticlesDAO;
 	}
-	
+
+	public void setOracleFileDAO(OracleFileDAO oracleFileDAO) {
+		this.oracleFileDAO = oracleFileDAO;
+	}
+
+	public void setOracleUserDAO(OracleUserDAO oracleUserDAO) {
+		this.oracleUserDAO = oracleUserDAO;
+	}
+
 	@SuppressWarnings("unchecked")
 	public void fileTableMigration() {
 		DateFormat format = new SimpleDateFormat("yyMMddhhmmss");
@@ -42,7 +54,7 @@ public class FileController {
 				OracleFileDTO oracleFileDTO = new OracleFileDTO();
 				String createDt = format.format(mongoData.getCreated());
 				//유저ID 찾기
-				String userId = postgresqlUserDAO.getUserIdByEmpNo(mongoData.getEmployeeId());
+				String userId = oracleUserDAO.getUserIdByEmpNo(mongoData.getEmployeeId());
 				if(userId != null) {
 					oracleFileDTO.setTemp_article_id(mongoData.get_id());
 					//System.out.println(mongoData.get_id());
@@ -53,7 +65,7 @@ public class FileController {
 					ArrayList<Object> arrayList = mongoData.getAttFile();
 					for(int i=0; i<arrayList.size(); i++) {
 						//파일ID 생성
-						String fileId = postgresqlFileDAO.setFileId(createDt);
+						String fileId = oracleFileDAO.setFileId(createDt);
 						oracleFileDTO.setFile_id(fileId);
 						//System.out.println(file_id);
 						LinkedHashMap<String,String> map = (LinkedHashMap<String, String>) arrayList.get(i);
@@ -90,8 +102,8 @@ public class FileController {
 							}
 		                } 
 						//인서트
-						System.out.println(oracleFileDTO.getFile_id() +" : "+ oracleFileDTO.getPath() +" : "+ oracleFileDTO.getPhysic_file_nm() +" : "+ oracleFileDTO.getLogic_file_nm() +" : "+ oracleFileDTO.getExt() +" : "+ oracleFileDTO.getVolume() +" : "+ oracleFileDTO.getCreate_id() +" : "+ oracleFileDTO.getCreate_dt() +" : "+ oracleFileDTO.getTemp_article_id());
-						postgresqlFileDAO.insert(oracleFileDTO);
+						logger.info(oracleFileDTO.getFile_id() +" : "+ oracleFileDTO.getPath() +" : "+ oracleFileDTO.getPhysic_file_nm() +" : "+ oracleFileDTO.getLogic_file_nm() +" : "+ oracleFileDTO.getExt() +" : "+ oracleFileDTO.getVolume() +" : "+ oracleFileDTO.getCreate_id() +" : "+ oracleFileDTO.getCreate_dt() +" : "+ oracleFileDTO.getTemp_article_id());
+						oracleFileDAO.insert(oracleFileDTO);
 					}
 				}
 			}

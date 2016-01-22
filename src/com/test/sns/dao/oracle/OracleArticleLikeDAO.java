@@ -1,48 +1,18 @@
 package com.test.sns.dao.oracle;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dto.oracle.OracleArticleLikeDTO;
 
+@Service
 public class OracleArticleLikeDAO {
-	private DataSource dataSource;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	public void insert(OracleArticleLikeDTO tb_articleLikeDTO) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement("INSERT INTO temp_tb_article_like (article_id, user_id, del_stat, create_dt) VALUES (?, ?, ?, SYSTIMESTAMP)");
-			ps.setString(1, tb_articleLikeDTO.getArticle_id());
-			ps.setString(2, tb_articleLikeDTO.getUser_id());
-			ps.setString(3, tb_articleLikeDTO.getDel_stat());
-
-			ps.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	public void insert(OracleArticleLikeDTO oracleArticleLikeDTO) {
+		this.jdbcTemplate.update("INSERT INTO temp_tb_article_like (article_id, user_id, del_stat, create_dt) VALUES (?, ?, ?, SYSTIMESTAMP)",
+				oracleArticleLikeDTO.getArticle_id(), oracleArticleLikeDTO.getUser_id(), oracleArticleLikeDTO.getDel_stat());
 	}
 }

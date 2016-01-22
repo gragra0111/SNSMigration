@@ -2,7 +2,9 @@ package com.test.sns.controller;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dao.mongo.MongoGroupsDAO;
 import com.test.sns.dao.oracle.OracleGroupDAO;
@@ -12,32 +14,41 @@ import com.test.sns.dao.postgresql.PostgresqlUserDAO;
 import com.test.sns.dto.mongo.MongoGroupsDTO;
 import com.test.sns.dto.oracle.OracleGroupDTO;
 
+@Service
 public class GroupController {
+	private final Logger logger = Logger.getLogger(GroupController.class);
+	@Autowired
 	private MongoGroupsDAO mongoGroupsDAO;
-	//private OracleGroupDAO oracleGroupDAO;
-	//private OracleUserDAO oracleUserDAO;
-	private PostgresqlGroupDAO postgresqlGroupDAO;
-	private PostgresqlUserDAO postgresqlUserDAO;
+	@Autowired
+	private OracleGroupDAO oracleGroupDAO;
+	@Autowired
+	private OracleUserDAO oracleUserDAO;
+	/*private PostgresqlGroupDAO postgresqlGroupDAO;
+	private PostgresqlUserDAO postgresqlUserDAO;*/
 	
-	public GroupController(ApplicationContext context) {
-		this.mongoGroupsDAO = context.getBean("mongoGroupsDAO", MongoGroupsDAO.class);
-		this.postgresqlGroupDAO = context.getBean("postgresqlGroupDAO", PostgresqlGroupDAO.class);
-		this.postgresqlUserDAO = context.getBean("postgresqlUserDAO", PostgresqlUserDAO.class);
-		groupTableMigration();
+	public void setMongoGroupsDAO(MongoGroupsDAO mongoGroupsDAO) {
+		this.mongoGroupsDAO = mongoGroupsDAO;
 	}
-	
+
+	public void setOracleGroupDAO(OracleGroupDAO oracleGroupDAO) {
+		this.oracleGroupDAO = oracleGroupDAO;
+	}
+
+	public void setOracleUserDAO(OracleUserDAO oracleUserDAO) {
+		this.oracleUserDAO = oracleUserDAO;
+	}
+
 	public void groupTableMigration() {
 		//몽고 그룹 데이터 저장
 		List<MongoGroupsDTO> list = this.mongoGroupsDAO.getGroup();
 		
 		for(MongoGroupsDTO data : list) {
+			logger.info(data.getUser());
 			OracleGroupDTO oracleGroupDTO = new OracleGroupDTO();
 			//그룹ID 생성
-			String grpId = postgresqlGroupDAO.setGroupId();
-			//System.out.println(grpId);
+			String grpId = oracleGroupDAO.setGroupId();
 			//로그인ID로 유저ID 찾기
-			String userId = postgresqlUserDAO.getUserIdByLgnId(data.getUser());
-			//System.out.println(userId);
+			String userId = oracleUserDAO.getUserIdByLgnId(data.getUser());
 			if(userId != null) {
 				oracleGroupDTO.setTemp_grp_id(data.get_id());
 				oracleGroupDTO.setGrp_id(grpId);
@@ -45,8 +56,8 @@ public class GroupController {
 				oracleGroupDTO.setGrp_expn(data.getDesc());
 				oracleGroupDTO.setCreate_id(userId);
 				//인서트
-				System.out.println("grp_id : "+grpId+", user_id : "+userId);
-				this.postgresqlGroupDAO.insert(oracleGroupDTO);
+				logger.info("grp_id : "+grpId+", user_id : "+userId);
+				oracleGroupDAO.insert(oracleGroupDTO);
 			}
 		}
 	}

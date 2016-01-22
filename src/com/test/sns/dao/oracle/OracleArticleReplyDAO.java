@@ -1,99 +1,27 @@
 package com.test.sns.dao.oracle;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dto.oracle.OracleArticleReplyDTO;
 
+@Service
 public class OracleArticleReplyDAO {
-	private DataSource dataSource;
-	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	
 	public Integer setSeq(String articleId){
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		int seq = 1;
-		
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement("SELECT max(seq) as seq FROM temp_tb_article_reply where article_id=?");
-			ps.setString(1, articleId);
-			rs = ps.executeQuery();
-			
-			rs.next();
-			
-			if(rs.getString("seq") != null) {
-				seq = Integer.parseInt(rs.getString("seq")) + 1;
-			}
-			//System.out.println(seq);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		String seq = this.jdbcTemplate.queryForObject("SELECT max(seq) as seq FROM temp_tb_article_reply where article_id=?", new Object[]{articleId}, String.class);
+		if(seq != null) {
+			return Integer.parseInt(seq) + 1;
+		} else {
+			return 1;
 		}
-		
-		return seq;
 	}
 
-	public void insert(OracleArticleReplyDTO tb_articleReplyDTO) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement("INSERT INTO temp_tb_article_reply (article_id, seq, ctnt, del_stat, create_id, create_dt) VALUES (?, ?, ?, ?, ?, ?)");
-			ps.setString(1, tb_articleReplyDTO.getArticle_id());
-			ps.setString(2, tb_articleReplyDTO.getSeq());
-			ps.setString(3, tb_articleReplyDTO.getCtnt());
-			ps.setString(4, tb_articleReplyDTO.getDel_stat());
-			ps.setString(5, tb_articleReplyDTO.getCreate_id());
-			ps.setString(6, tb_articleReplyDTO.getCreate_dt());
-
-			ps.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	public void insert(OracleArticleReplyDTO oracleArticleReplyDTO) {
+		this.jdbcTemplate.update("INSERT INTO temp_tb_article_reply (article_id, seq, ctnt, del_stat, create_id, create_dt) VALUES (?, ?, ?, ?, ?, ?)",
+				oracleArticleReplyDTO.getArticle_id(), oracleArticleReplyDTO.getSeq(), oracleArticleReplyDTO.getCtnt(), oracleArticleReplyDTO.getDel_stat(), oracleArticleReplyDTO.getCreate_id(), oracleArticleReplyDTO.getCreate_dt());
 	}
 }

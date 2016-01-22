@@ -2,7 +2,9 @@ package com.test.sns.controller;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.test.sns.dao.mongo.MongoDeptsDAO;
 import com.test.sns.dao.oracle.OracleDeptDAO;
@@ -10,17 +12,23 @@ import com.test.sns.dao.postgresql.PostgresqlDeptDAO;
 import com.test.sns.dto.mongo.MongoDeptsDTO;
 import com.test.sns.dto.oracle.OracleDeptDTO;
 
+@Service
 public class DeptController {
+	private final Logger logger = Logger.getLogger(DeptController.class);
+	@Autowired
 	private MongoDeptsDAO mongoDeptsDAO;
-	//private OracleDeptDAO oracleDeptDAO;
-	private PostgresqlDeptDAO postgresqlDeptDAO;
+	@Autowired
+	private OracleDeptDAO oracleDeptDAO;
+	//private PostgresqlDeptDAO postgresqlDeptDAO;
 	
-	public DeptController(ApplicationContext context) {
-		this.mongoDeptsDAO = context.getBean("mongoDeptsDAO", MongoDeptsDAO.class);
-		this.postgresqlDeptDAO = context.getBean("postgresqlDeptDAO", PostgresqlDeptDAO.class);
-		deptTableMigration();
+	public void setMongoDeptsDAO(MongoDeptsDAO mongoDeptsDAO) {
+		this.mongoDeptsDAO = mongoDeptsDAO;
 	}
-	
+
+	public void setOracleDeptDAO(OracleDeptDAO oracleDeptDAO) {
+		this.oracleDeptDAO = oracleDeptDAO;
+	}
+
 	public void deptTableMigration() {
 		//몽고 부서 데이터 저장
 		List<MongoDeptsDTO> list = mongoDeptsDAO.getDepts();
@@ -33,8 +41,8 @@ public class DeptController {
 				oracleDeptDTO.setDept_nm(data.getDeptName());
 				oracleDeptDTO.setUse_yn("Y");
 				//인서트
-				System.out.println(oracleDeptDTO.getDept_id());
-				postgresqlDeptDAO.insert(oracleDeptDTO);
+				logger.info("oracleDeptDTO.getDept_id() : " + oracleDeptDTO.getDept_id() + ", data.getDeptName() : " + data.getDeptName());
+				oracleDeptDAO.insert(oracleDeptDTO);
 			}
 		}
 	}

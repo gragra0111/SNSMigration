@@ -6,9 +6,14 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.test.sns.dto.oracle.OracleArticleScopeDTO;
 
+@Service
 public class PostgresqlArticleScopeDAO {
+	@Autowired
 	private DataSource dataSource;
 	
 	public void setDataSource(DataSource dataSource) {

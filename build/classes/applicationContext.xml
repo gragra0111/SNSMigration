@@ -16,223 +16,37 @@
 		http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd http://www.springframework.org/schema/data/mongo
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 	
-	
-	<bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    
+    <context:annotation-config/>
+    <context:component-scan base-package="com.test.sns.controller" />
+    <context:component-scan base-package="com.test.sns.dao.mongo" />
+    <context:component-scan base-package="com.test.sns.dao.oracle" />
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	    <property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- Postgresql 관련 -->
+	<!-- <bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://192.168.100.22:5432/snsdb" />
 		<property name="username" value="sns" />
 		<property name="password" value="password00" />
-	</bean>
+	</bean> -->	
 	
-	<bean id="postgresqlUserDAO" class="com.test.sns.dao.postgresql.PostgresqlUserDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlGroupDAO" class="com.test.sns.dao.postgresql.PostgresqlGroupDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlDeptDAO" class="com.test.sns.dao.postgresql.PostgresqlDeptDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlUserDeptDAO" class="com.test.sns.dao.postgresql.PostgresqlUserDeptDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlGroupMemberDAO" class="com.test.sns.dao.postgresql.PostgresqlGroupMemberDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlUserLinkDAO" class="com.test.sns.dao.postgresql.PostgresqlUserLinkDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlBookmarkDAO" class="com.test.sns.dao.postgresql.PostgresqlBookmarkDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlMessageDAO" class="com.test.sns.dao.postgresql.PostgresqlMessageDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlUserMessageDAO" class="com.test.sns.dao.postgresql.PostgresqlUserMessageDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlFileDAO" class="com.test.sns.dao.postgresql.PostgresqlFileDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlArticleDAO" class="com.test.sns.dao.postgresql.PostgresqlArticleDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlArticleFileDAO" class="com.test.sns.dao.postgresql.PostgresqlArticleFileDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlArticleScopeDAO" class="com.test.sns.dao.postgresql.PostgresqlArticleScopeDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlHashtagDAO" class="com.test.sns.dao.postgresql.PostgresqlHashtagDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlArticleReplyDAO" class="com.test.sns.dao.postgresql.PostgresqlArticleReplyDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlArticleLikeDAO" class="com.test.sns.dao.postgresql.PostgresqlArticleLikeDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlBookmarkArticleDAO" class="com.test.sns.dao.postgresql.PostgresqlBookmarkArticleDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="postgresqlUserCareerDAO" class="com.test.sns.dao.postgresql.PostgresqlUserCareerDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<!-- Oracle 관련 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
 		<property name="username" value="sns" />
 		<property name="password" value="password00" />
-	</bean> -->
-	
-	<bean id="oracleUserDAO" class="com.test.sns.dao.oracle.OracleUserDAO">
-		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="oracleGroupDAO" class="com.test.sns.dao.oracle.OracleGroupDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleDeptDAO" class="com.test.sns.dao.oracle.OracleDeptDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleUserDeptDAO" class="com.test.sns.dao.oracle.OracleUserDeptDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleGroupMemberDAO" class="com.test.sns.dao.oracle.OracleGroupMemberDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleUserLinkDAO" class="com.test.sns.dao.oracle.OracleUserLinkDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleBookmarkDAO" class="com.test.sns.dao.oracle.OracleBookmarkDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleMessageDAO" class="com.test.sns.dao.oracle.OracleMessageDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleUserMessageDAO" class="com.test.sns.dao.oracle.OracleUserMessageDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleFileDAO" class="com.test.sns.dao.oracle.OracleFileDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleArticleDAO" class="com.test.sns.dao.oracle.OracleArticleDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleArticleFileDAO" class="com.test.sns.dao.oracle.OracleArticleFileDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleArticleScopeDAO" class="com.test.sns.dao.oracle.OracleArticleScopeDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleHashtagDAO" class="com.test.sns.dao.oracle.OracleHashtagDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleArticleReplyDAO" class="com.test.sns.dao.oracle.OracleArticleReplyDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleArticleLikeDAO" class="com.test.sns.dao.oracle.OracleArticleLikeDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleBookmarkArticleDAO" class="com.test.sns.dao.oracle.OracleBookmarkArticleDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="oracleUserCareerDAO" class="com.test.sns.dao.oracle.OracleUserCareerDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	
-	
-	
-	
+	<!-- Mongo 관련 -->
 	<mongo:mongo host="192.168.100.48" port="27017" />
-	
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo" />
 		<constructor-arg name="databaseName" value="sns" />
-	</bean>
-	
-	<bean id="mongoUsersDAO" class="com.test.sns.dao.mongo.MongoUsersDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoGroupsDAO" class="com.test.sns.dao.mongo.MongoGroupsDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoDeptsDAO" class="com.test.sns.dao.mongo.MongoDeptsDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoGrpMembersDAO" class="com.test.sns.dao.mongo.MongoGrpMembersDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoMylinksDAO" class="com.test.sns.dao.mongo.MongoMylinksDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoBookmarksDAO" class="com.test.sns.dao.mongo.MongoBookmarksDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoMytagsDAO" class="com.test.sns.dao.mongo.MongoMytagsDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoArticlesDAO" class="com.test.sns.dao.mongo.MongoArticlesDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoTaglistsDAO" class="com.test.sns.dao.mongo.MongoTaglistsDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoRepliesDAO" class="com.test.sns.dao.mongo.MongoRepliesDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoBookmarklistsDAO" class="com.test.sns.dao.mongo.MongoBookmarklistsDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
-	</bean>
-	
-	<bean id="mongoCareersDAO" class="com.test.sns.dao.mongo.MongoCareersDAO">
-		<property name="mongoTemplate" ref="mongoTemplate" />
 	</bean>
 	
 </beans>

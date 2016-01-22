@@ -7,161 +7,42 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
 import com.test.sns.dto.oracle.OracleHashtagDTO;
 
+@Service
 public class OracleHashtagDAO {
-private DataSource dataSource;
-	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	public String setHashtagId() {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String hashtag_id = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement("SELECT"
-					+ " CASE TO_NUMBER(TO_CHAR(SYSDATE,'YYYYMMDD')) - TO_NUMBER(TO_CHAR(NVL(MAX(create_dt),SYSDATE-1),'YYYYMMDD'))"
-					+ " WHEN 0 THEN 'T' || TO_CHAR(SYSDATE,'YYYYMMDD') || LPAD(TO_NUMBER(SUBSTR(MAX(hashtag_id),10))+1,9,'0')"
-					+ " ELSE 'T' || TO_CHAR(SYSDATE,'YYYYMMDD') || '000000000' END AS hashtagId FROM temp_tb_hashtag");
-			rs = ps.executeQuery();
-			rs.next();
-			
-			hashtag_id = rs.getString("hashtagId");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return hashtag_id;
+		return this.jdbcTemplate.queryForObject("SELECT"
+				+ " CASE TO_NUMBER(TO_CHAR(SYSDATE,'YYYYMMDD')) - TO_NUMBER(TO_CHAR(NVL(MAX(create_dt),SYSDATE-1),'YYYYMMDD'))"
+				+ " WHEN 0 THEN 'T' || TO_CHAR(SYSDATE,'YYYYMMDD') || LPAD(TO_NUMBER(SUBSTR(MAX(hashtag_id),10))+1,9,'0')"
+				+ " ELSE 'T' || TO_CHAR(SYSDATE,'YYYYMMDD') || '000000000' END AS hashtagId FROM temp_tb_hashtag"
+				, String.class);
 	}
 
-	public void insert(OracleHashtagDTO hashtagDTO) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement("INSERT INTO temp_tb_hashtag (HASHTAG_ID, HASHTAG, USE_CNT, CREATE_DT, UPDATE_DT) VALUES (?, ?, ?, SYSTIMESTAMP, SYSTIMESTAMP)");
-			ps.setString(1, hashtagDTO.getHashtag_id());
-			ps.setString(2, hashtagDTO.getHashtag());
-			ps.setString(3, hashtagDTO.getUse_cnt());
-			
-			ps.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	public void insert(OracleHashtagDTO oracleHashtagDTO) {
+		this.jdbcTemplate.update("INSERT INTO temp_tb_hashtag (HASHTAG_ID, HASHTAG, USE_CNT, CREATE_DT, UPDATE_DT) VALUES (?, ?, ?, SYSTIMESTAMP, SYSTIMESTAMP)",
+				oracleHashtagDTO.getHashtag_id(), oracleHashtagDTO.getHashtag(), oracleHashtagDTO.getUse_cnt());
 	}
 
 	public String getTagIdByTagNm(String tag) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String hashtagId = null;
-		
 		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement("SELECT hashtag_id FROM temp_tb_hashtag WHERE HASHTAG = ?");
-			ps.setString(1, tag);
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				hashtagId = rs.getString("hashtag_id");
-			}
-		} catch (SQLException e) {
+			return this.jdbcTemplate.queryForObject("SELECT hashtag_id FROM temp_tb_hashtag WHERE HASHTAG = ?", new Object[]{tag}, String.class);
+		} catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
-		} finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			return null;
 		}
-		return hashtagId;
 	}
 
 	public void insert(String articleId, String hashtagId) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement("INSERT INTO temp_tb_article_hashtag (ARTICLE_ID, HASHTAG_ID) VALUES (?, ?)");
-			ps.setString(1, articleId);
-			ps.setString(2, hashtagId);
-			
-			ps.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		this.jdbcTemplate.update("INSERT INTO temp_tb_article_hashtag (ARTICLE_ID, HASHTAG_ID) VALUES (?, ?)",
+				articleId, hashtagId);
 	}
 }
